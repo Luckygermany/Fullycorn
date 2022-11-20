@@ -1,0 +1,16 @@
+{
+    "launge": "en",
+    "<Message id=1043865420479864863 channel=<TextChannel id=1043811044054802493 name='\ud83c\udf0f\u23b0global' position=8 nsfw=False news=False category_id=1043810226157133824> type=<MessageType.default: 0> author=<Member id=1043838544180953128 name='Fluffycorn' discriminator='8322' bot=True nick=None guild=<Guild id=1043614586600951899 name='Fluffycorn`s place' shard_id=0 chunked=True member_count=3>> flags=<MessageFlags value=0>>": {
+        "topic": "s",
+        "text": "s",
+        "channel_id": "1043811044054802493"
+    },
+    "1043810429291474964": {
+        "topic": "shoi",
+        "text": "uohidf"
+    },
+    "1043811044054802493": {
+        "topic": "uohidfs",
+        "text": "uihdas"
+    }
+}
