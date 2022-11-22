@@ -16,7 +16,6 @@ from discord import Embed
 
 from datetime import datetime
 from colorama import Back, Fore, Style
-from nButton import test
 import datetime
 import platform
 import time
@@ -53,13 +52,13 @@ class btn4(discord.ui.View):
         await asyncio.sleep(1)
         await chan.delete()
 class btn3(discord.ui.View):
-    @test.button_e(label="Close", style=discord.ButtonStyle.red, emoji="❌")
+    discord.ui.button(label="Close", style=discord.ButtonStyle.red, emoji="❌")
     async def close(self, interaction: discord.Interaction, button: discord.Button):
         chan = client.get_channel(interaction.channel_id)
         embed = discord.Embed(title=f"{interaction.user.name}", description="Are you sure to close the ticket")
         view = btn4()
         await chan.send(embed=embed, view=view)
-    @test.button_e(label="Claim", emoji="🔒", style=discord.ButtonStyle.green)
+    discord.ui.button(label="Claim", emoji="🔒", style=discord.ButtonStyle.green)
     async def claim(self, interaction: discord.Interaction, button: discord.Button):
         ebed= discord.Embed(title=f"Ticket Claim", description=f"> Ticket claimed by {interaction.user.mention}")
         chan = client.get_channel(interaction.channel_id)
@@ -67,7 +66,7 @@ class btn3(discord.ui.View):
 
 
 class btn2(discord.ui.View):
-    @test.button_e(label="Ticket offnen", emoji="🎟️", style=discord.ButtonStyle.green)
+    discord.ui.button(label="Ticket offnen", emoji="🎟️", style=discord.ButtonStyle.green)
     async def cs(self, interaction: discord.Interaction, button: discord.Button):
         s = interaction.channel_id
         chan = await interaction.guild.create_text_channel(name=f"ticket-{interaction.user}")
@@ -150,7 +149,29 @@ async def clear(interaction: discord.Interaction, number : int):
         await interaction.channel.purge(limit=number)
 
 
+@client.tree.command(name='ban')
+@commands.has_guild_permissions(ban_members=True)
+async def ban(interaction:discord.Interaction, member:discord.Member, reason:str):
+    if member is None:
+        return
+    await member.kick(reason=reason)
+    embed = discord.Embed(title='BAN', description=f'{member.mention} wurde von {interaction.user.mention} gebannt\n**Grund:** {reason}')
+    await interaction.response.send_message(embed=embed)
+
+    
+@client.tree.command(name='kick')
+@commands.has_guild_permissions(kick_members=True)
+async def kick(interaction:discord.Interaction, member:discord.Member):
+    if member is None:
+        return
+    await member.kick()
+    embed = discord.Embed(title='KICK',description=f'{member.mention} wurde von {interaction.user.mention} gekickt')
+    await interaction.response.send_message(embed=embed)
+
+@client.tree.command(name='ping')
+async def ping(interaction:discord.Interaction):
+    embed = discord.Embed(title=f'🏓 Pong',description=f'**Ping:** {round(client.latency * 1000)}ms')
+    await interaction.response.send_message(embed=embed)
 
 
-
-client.run("MTA0MzgzODU0NDE4MDk1MzEyOA.Gr_It6.BcSvn0q7rl6E8v5oFuyw-NlopgAf_Xa5n6GnnY")
+client.run("MTA0MzgzODU0NDE4MDk1MzEyOA.Gm-tpo.NUiUkG6VnBC0omzDf0niqic4JxWojUQztcD9R4")
