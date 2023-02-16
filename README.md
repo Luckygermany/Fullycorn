@@ -1,2 +1,1 @@
-# Fullycorn
-Fully corn
+# Fluffcorn
